@@ -14,17 +14,21 @@
         <div class="btn btn-primary" ng-click="addComment()">Add Comment</div>
 
         <div data-ng-init="getAllComments()">
-                <div data-ng-repeat="r in res">
-                    <p>
-                        Name: {{r.name}}
-                    </p>
-                    <p>
-                        Comment: {{r.comment}}
-                    </p>
-                </div>
-                <p ng-click="upVote()">Upvote</p> <br>
-                <p ng-click="downVote()">DownVote</p>
+            <div data-ng-if="dataList.length !== 0">
+                    <div data-ng-repeat="r in dataList">
+                        <p>
+                            Name: {{r.name}}
+                        </p>
+                        <p>
+                            Comment: {{r.comment}}
+                        </p>
+    
+                        <p ng-click="upVote(r['id'])">Upvote {{r.upvote}}</p>
+                        <p ng-click="downVote(r['id'])">DownVote {{r.downvote}}</p>
+                    </div>
+
             </div>
+        </div>
     </div>
 
     

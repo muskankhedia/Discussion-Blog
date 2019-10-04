@@ -8,7 +8,7 @@ const express = require('express'),
 	port = process.env.PORT || 5000,
 	url = '0.0.0.0';
 
-var db = new JsonDB(new Config('./datastore/comments-store', true, true, '/'));
+var db = new JsonDB(new Config('./datastore/data-store', true, true, '/'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -28,30 +28,55 @@ app.get('/', (_ ,res) => {
 
 app.post('/addComment', (req, res) => {
 
+
 	let name = req.body.name,
 		comment = req.body.comment;
-    
+	var len = 0;
+	var dataCheck = db.getData('/');
+	if (Object.keys(dataCheck).length > 0) {
+		var data = db.getData('/data');
+		len = Object.keys(data).length;
+	}
 	var obj ={
 		name: name,
-		comment: comment
+		comment: comment,
+		upvote: 0,
+		downvote: 0,
+		id: len
 	};
 
-	db.push('/comments/1', obj);
+	var addr = '/data/' + len;
+	db.push(addr, obj);
 	res.send('Yes');
 });
 
-app.post('/upvoteComment', (_req, _res) => {
-
+app.post('/upvoteComment', (req, res) => {
+	let id = req.body.id;
+	let addr = '/data/'+id+'/upvote';
+	var upvote = db.getData(addr);
+	upvote++;
+	db.push(addr, upvote);
+	res.send('yes');
 });
 
-app.post('/downvoteComment', (_req, _res) => {
-
+app.post('/downvoteComment', (req, res) => {
+	let id = req.body.id;
+	let addr = '/data/'+id+'/downvote';
+	var downvote = db.getData(addr);
+	downvote++;
+	db.push(addr, downvote);
+	res.send('yes');
 });
 
 app.get('/getComments', (_, res) => {
-	var data = db.getData('/comments');
-	console.log(data);
-	res.send(data);
+	var dataCheck = db.getData('/');
+	if (Object.keys(dataCheck).length > 0) {
+		var data = db.getData('/data');
+		res.send(data);
+	} else {
+		res.send('Empty Dataset');
+	}
+	
 });
 
 const server = app.listen(port, url, e => {

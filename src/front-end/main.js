@@ -38,6 +38,7 @@ app.controller('commentController', function($scope, $http) {
 			.then( resp => {
 				res = resp.data;
 				console.log(res);
+				$scope.getAllComments();
 			});
 	};
 	$scope.getAllComments = function() {
@@ -52,9 +53,47 @@ app.controller('commentController', function($scope, $http) {
 		)
 			.then( resp => {
 				$scope.res = resp.data;
+				$scope.dataList = {};
+				if ($scope.res === 'Empty Dataset') {
+					console.log('fill data');
+				} else {
+					$scope.dataList = resp.data;
+				}
 			});
 	};
-    
-
-
+	$scope.upVote = function(id) {
+		console.log('clickedasdfasd');
+		let data = 'id='+id;
+		$http(
+			{
+				url: global.url+'/upvoteComment',
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded' 
+				},
+				data: data
+			}
+		)
+			.then( resp => {
+				res = resp.data;
+				$scope.getAllComments();
+			});
+	};
+	$scope.downVote = function(id) {
+		let data = 'id='+id;
+		$http(
+			{
+				url: global.url+'/downvoteComment',
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded' 
+				},
+				data: data
+			}
+		)
+			.then( resp => {
+				res = resp.data;
+				$scope.getAllComments();
+			});
+	};
 });
