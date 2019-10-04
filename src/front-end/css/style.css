@@ -21,13 +21,14 @@
     margin-bottom: 5%;
     width: 300px;
     border: black 1px solid;
-    padding: 1%;
+    padding: 1.25%;
     border-radius: 13px;
     box-shadow: inset 0 0 5px #000000;
 }
 
 #comment-box {
     border-radius: 13px;
+    padding: 1.25%;
     box-shadow: inset 0 0 5px #000000;
 }
 

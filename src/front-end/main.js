@@ -1,30 +1,22 @@
 /* eslint-disable no-undef */
 var app = angular.module('commenting-app', ['ngRoute']);
 
-var global = {
-	url:'http://0.0.0.0:5000',
-	refresh:true,
-};
+var url = 'http://0.0.0.0:5000';
 
 app.config(function($routeProvider) {
 	$routeProvider
 		.when('/',{
 			templateUrl:'./html_components/comments.html',
 			controller:'commentController',
-			title:'Commenting App',
+			title:'Discussion Blog',
 		});
 });
 
 app.controller('commentController', function($scope, $http) {
-	console.warn('initiated project');
-	console.log($scope.newComment);
 	$scope.name = '';
 	$scope.newComment = '';
 	$scope.message = '';
 	$scope.addComment = function() {
-		console.log('clicked');
-		console.log($scope.name);
-		console.log($scope.newComment);
 		$scope.message = '';
 		if ($scope.name.length !== 0 && $scope.newComment.length !== 0) {
 			let data = 'name='+$scope.name+'&comment='+$scope.newComment;
@@ -32,7 +24,7 @@ app.controller('commentController', function($scope, $http) {
 			$scope.newComment = '';
 			$http(
 				{
-					url: global.url+'/addComment',
+					url: url+'/addComment',
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded' 
@@ -42,18 +34,17 @@ app.controller('commentController', function($scope, $http) {
 			)
 				.then( resp => {
 					res = resp.data;
-					console.log(res);
 					$scope.getAllComments();
 				});
 		} else {
-			$scope.message = "Please Fill the details"
+			$scope.message = 'Please Fill the details';
 		}
 		
 	};
 	$scope.getAllComments = function() {
 		$http(
 			{
-				url: global.url+'/getComments',
+				url: url+'/getComments',
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded' 
@@ -64,7 +55,7 @@ app.controller('commentController', function($scope, $http) {
 				var res = resp.data;
 				$scope.dataList = {};
 				if (res === 'Empty Dataset') {
-					console.log('fill data');
+					console.warn('fill data');
 				} else {
 					res.sort((a, b) => {
 						return b['id']-a['id'];
@@ -74,11 +65,10 @@ app.controller('commentController', function($scope, $http) {
 			});
 	};
 	$scope.upVote = function(id) {
-		console.log('clickedasdfasd');
 		let data = 'id='+id;
 		$http(
 			{
-				url: global.url+'/upvoteComment',
+				url: url+'/upvoteComment',
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded' 
@@ -95,7 +85,7 @@ app.controller('commentController', function($scope, $http) {
 		let data = 'id='+id;
 		$http(
 			{
-				url: global.url+'/downvoteComment',
+				url: url+'/downvoteComment',
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded' 
