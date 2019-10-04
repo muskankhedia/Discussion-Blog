@@ -48,6 +48,12 @@ app.post('/downvoteComment', (_req, _res) => {
 
 });
 
+app.get('/getComments', (_, res) => {
+	var data = db.getData('/comments');
+	console.log(data);
+	res.send(data);
+});
+
 const server = app.listen(port, url, e => {
 	if(e) throw e;
 	else {

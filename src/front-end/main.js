@@ -40,5 +40,21 @@ app.controller('commentController', function($scope, $http) {
 				console.log(res);
 			});
 	};
+	$scope.getAllComments = function() {
+		$http(
+			{
+				url: global.url+'/getComments',
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded' 
+				}
+			}
+		)
+			.then( resp => {
+				$scope.res = resp.data;
+			});
+	};
+    
+
 
 });

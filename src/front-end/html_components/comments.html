@@ -11,6 +11,21 @@
         <label>Comment</label>
         <textarea cols="50" rows="5" style="border:solid 1px orange;" ng-model="newComment"></textarea>
         <br>
-        <div class="btn btn-primary" ng-click="addComment()">Add Comment</button>
-        </div>
+        <div class="btn btn-primary" ng-click="addComment()">Add Comment</div>
+
+        <div data-ng-init="getAllComments()">
+                <div data-ng-repeat="r in res">
+                    <p>
+                        Name: {{r.name}}
+                    </p>
+                    <p>
+                        Comment: {{r.comment}}
+                    </p>
+                </div>
+                <p ng-click="upVote()">Upvote</p> <br>
+                <p ng-click="downVote()">DownVote</p>
+            </div>
+    </div>
+
+    
 </body>
