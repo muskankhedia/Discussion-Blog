@@ -5,7 +5,12 @@
                 I am Muskan Khedia
             </p>
         </div>
+        <label>Name</label>
+        <input name= "Name" type = "text" ng-model="name">
+        <br>
+        <label>Comment</label>
         <textarea cols="50" rows="5" style="border:solid 1px orange;" ng-model="newComment"></textarea>
-        <button class="btn btn-primary">Add Comment</button>
-    </div>
+        <br>
+        <div class="btn btn-primary" ng-click="addComment()">Add Comment</button>
+        </div>
 </body>
