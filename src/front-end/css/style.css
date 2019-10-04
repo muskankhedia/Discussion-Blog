@@ -1,8 +1,58 @@
 #mainContainer {
     margin-top: 50px;
-    border: 5px black solid;
+    max-width: 600px;
+    /* border: 5px black solid; */
 }
 
 #article {
     margin-top: 20px;
+}
+
+#postComment {
+    float: right;
+    margin-right: 7px;
+}
+
+#after-comments {
+    margin-top: 0rem;
+}
+
+#name {
+    margin-bottom: 5%;
+    width: 300px;
+    border: black 1px solid;
+    padding: 1%;
+    border-radius: 13px;
+    box-shadow: inset 0 0 5px #000000;
+}
+
+#comment-box {
+    border-radius: 13px;
+    box-shadow: inset 0 0 5px #000000;
+}
+
+#thumbs-up {
+    cursor: pointer;
+    font-size:24px;
+    color:green
+}
+
+#thumbs-down {
+    cursor: pointer;
+    font-size:24px;
+    color:red
+}
+
+#errorMessage {
+    color: red;
+    text-align: center;
+}
+
+#displayName {
+    color: black;
+    font-size: 20px;
+}
+
+#displayComment {
+    color: #676464;
 }

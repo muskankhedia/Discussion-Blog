@@ -20,26 +20,35 @@ app.controller('commentController', function($scope, $http) {
 	console.log($scope.newComment);
 	$scope.name = '';
 	$scope.newComment = '';
+	$scope.message = '';
 	$scope.addComment = function() {
 		console.log('clicked');
 		console.log($scope.name);
 		console.log($scope.newComment);
-		let data = 'name='+$scope.name+'&comment='+$scope.newComment;
-		$http(
-			{
-				url: global.url+'/addComment',
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded' 
-				},
-				data: data
-			}
-		)
-			.then( resp => {
-				res = resp.data;
-				console.log(res);
-				$scope.getAllComments();
-			});
+		$scope.message = '';
+		if ($scope.name.length !== 0 && $scope.newComment.length !== 0) {
+			let data = 'name='+$scope.name+'&comment='+$scope.newComment;
+			$scope.name = '';
+			$scope.newComment = '';
+			$http(
+				{
+					url: global.url+'/addComment',
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded' 
+					},
+					data: data
+				}
+			)
+				.then( resp => {
+					res = resp.data;
+					console.log(res);
+					$scope.getAllComments();
+				});
+		} else {
+			$scope.message = "Please Fill the details"
+		}
+		
 	};
 	$scope.getAllComments = function() {
 		$http(
@@ -52,12 +61,15 @@ app.controller('commentController', function($scope, $http) {
 			}
 		)
 			.then( resp => {
-				$scope.res = resp.data;
+				var res = resp.data;
 				$scope.dataList = {};
-				if ($scope.res === 'Empty Dataset') {
+				if (res === 'Empty Dataset') {
 					console.log('fill data');
 				} else {
-					$scope.dataList = resp.data;
+					res.sort((a, b) => {
+						return b['id']-a['id'];
+					});
+					$scope.dataList = res;
 				}
 			});
 	};

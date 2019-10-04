@@ -72,7 +72,11 @@ app.get('/getComments', (_, res) => {
 	var dataCheck = db.getData('/');
 	if (Object.keys(dataCheck).length > 0) {
 		var data = db.getData('/data');
-		res.send(data);
+		let arr = [];
+		for (let inst in data) {
+			arr.push(data[inst]);
+		}
+		res.send(arr);
 	} else {
 		res.send('Empty Dataset');
 	}

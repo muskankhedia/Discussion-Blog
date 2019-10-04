@@ -1,31 +1,43 @@
 <body>
     <div class="container" id="mainContainer">
         <div id="article">
+            <h3>
+                Article
+            </h3>
+            <hr>
             <p>
-                I am Muskan Khedia
+                    The creative process is the act of making new connections between old ideas or recognizing relationships between concepts. Creative thinking is not about generating something new from a blank slate, but rather about taking what is already present and combining those bits and pieces in a way that has not been done previously.
+                    <br>
+                    While being creative isn't easy, nearly all great ideas follow a similar creative process. In 1940, an advertising executive named James Webb Young published a short guide titled, A Technique for Producing Ideas.
             </p>
         </div>
-        <label>Name</label>
-        <input name= "Name" type = "text" ng-model="name">
-        <br>
-        <label>Comment</label>
-        <textarea cols="50" rows="5" style="border:solid 1px orange;" ng-model="newComment"></textarea>
-        <br>
-        <div class="btn btn-primary" ng-click="addComment()">Add Comment</div>
 
+        <h6><bold>Comments</bold></h6>
+        <hr id="after-comments">
+        <div data-ng-if="message.length !== 0" id="errorMessage">
+            {{message}}
+        </div>
+        <input name= "Name" type = "text" ng-model="name" placeholder="Enter Your Name" id="name">
+        <br>
+        <!-- <label>Comment</label> -->
+        <textarea cols="60" rows="5" style="border:solid 1px black;" id="comment-box" ng-model="newComment"
+         placeholder="Type a comment..."></textarea>
+        <br>
+        <div class="btn btn-danger" ng-click="addComment()" id = "postComment">Post Comment</div>
+        <br>
+        <br>
         <div data-ng-init="getAllComments()">
             <div data-ng-if="dataList.length !== 0">
-                    <div data-ng-repeat="r in dataList">
-                        <p>
-                            Name: {{r.name}}
-                        </p>
-                        <p>
-                            Comment: {{r.comment}}
-                        </p>
-    
-                        <p ng-click="upVote(r['id'])">Upvote {{r.upvote}}</p>
-                        <p ng-click="downVote(r['id'])">DownVote {{r.downvote}}</p>
-                    </div>
+                <ol>
+                        <li data-ng-repeat="r in dataList">
+                                <span id="displayName">{{r.name}} <br></span>
+                                <span id="displayComment">{{r.comment}}</span> <br>
+                                <i class="fa fa-thumbs-up" id="thumbs-up" ng-click="upVote(r['id'])"></i> {{r.upvote}} &nbsp;
+                                <i class="fa fa-thumbs-down" id="thumbs-down" ng-click="downVote(r['id'])"></i> {{r.downvote}}
+                                    <hr>
+                            </li>
+                </ol>
+                    
 
             </div>
         </div>
