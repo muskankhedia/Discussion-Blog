@@ -3,9 +3,23 @@
         "0": {
             "name": "Muskan Khedia",
             "comment": "Here is the suggestion to the article. It has the best context on creativity and will be liked by all.",
-            "upvote": 16,
-            "downvote": 10,
+            "upvote": 19,
+            "downvote": 13,
             "id": 0
+        },
+        "1": {
+            "name": "Testing",
+            "comment": "Here are some reviews in the article....",
+            "upvote": 5,
+            "downvote": 3,
+            "id": 1
+        },
+        "2": {
+            "name": "Another Test",
+            "comment": "I wanna add my reviews.......",
+            "upvote": 3,
+            "downvote": 2,
+            "id": 2
         }
     }
 }
