@@ -31,7 +31,7 @@ npm start
 * **Database** JSON-db (in-memory)
 
 ## Demo video
-Click on this [link](https://drive.google.com/file/d/1ZV8FD2y8DHewG664DboIXidpbWnb9xoN/view) to watch a demo on the application.
+Click on this [link](https://youtu.be/MFdlh4Kt1Ro) to watch a demo on the application.
 
 ## :gem: Contributors
 [Muskan Khedia](https://github.com/muskankhedia)
