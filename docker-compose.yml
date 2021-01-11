@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+
+################################
+# Setup node container
+################################
+
+  server:
+    build: ./src/app
+    expose:
+      - ${APP_SERVER_PORT}
+    environment:
+      API_HOST: ${API_HOST}
+      APP_SERVER_PORT: ${APP_SERVER_PORT}
+    ports:
+      - ${APP_SERVER_PORT}:${APP_SERVER_PORT}
+    volumes:
+      - ./src/app:/srv/app/fr-shohin-admin-server
+    command: npm start
+  
+################################
+# Setup client container
+################################
+
+  client:
+    build: ./src/front-end
+    environment:
+      - REACT_APP_PORT=${REACT_APP_PORT}
+    expose:
+      - ${REACT_APP_PORT}
+    ports:
+      - ${REACT_APP_PORT}:${REACT_APP_PORT}
+    volumes:
+      - ./src/front-end:/srv/app/fr-shohin-admin-client
+    links:
+      - server
+    command: npm start
